@@ -3,7 +3,7 @@ import Registration from './Registration.jsx';
 import { Router, Route, Link } from 'react-router';
 import Parse from 'parse';
 
-import 'bootstrap/dist/css/bootstrap.css';
+import 'css!./bootstrap/dist/css/bootstrap.css';
 
 export default class App extends React.Component {
   constructor(props) {

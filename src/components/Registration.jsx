@@ -1,4 +1,6 @@
 import React from 'react';
+import Parse from 'parse';
+import ParseReact from 'parse-react';
 
 export default class Registration extends React.Component {
   constructor(props) {
@@ -17,13 +19,19 @@ export default class Registration extends React.Component {
   render() {
     return (
       <form>
-        <label>Email:</label>
-        <input className='form-control' type='text' value={this.state.email} onChange={this.handleEmailChange}></input>
-        <label>Password:</label>
-        <input className='form-control' type='text' value={this.state.password} onChange={this.handlePasswordChange}></input>
-        <label>Confirm:</label>
-        <input className='form-control' type='text' value={this.state.confirmPassword} onChange={this.handleConfirmChange}></input>
-        <button type='button' className='btn btn-success' onClick={this.registerUser}>Sign up</button>
+        <div class="form-group">
+          <label>Email:</label>
+          <input className='form-control' type='text' value={this.state.email} onChange={this.handleEmailChange}></input>
+        </div>
+        <div class="form-group">
+          <label>Password:</label>
+          <input className='form-control' type='text' value={this.state.password} onChange={this.handlePasswordChange}></input>
+        </div>
+        <div class="form-group">
+          <label>Confirm:</label>
+          <input className='form-control' type='text' value={this.state.confirmPassword} onChange={this.handleConfirmChange}></input>
+        </div>
+        <button type='submit' className='btn btn-success' onClick={this.registerUser}>Sign up</button>
       </form>
     );
   }
@@ -37,6 +45,26 @@ export default class Registration extends React.Component {
     this.setState({ confirmPassword: event.target.value });
   }
   registerUser() {
+    if (this.state.password === this.state.confirmPassword) {
+      var user = new Parse.User();
+      user.set("email", this.state.email);
+      user.set("password", this.state.password);
 
+      user.signUp(null, {
+        success: function(user) {
+          if (this.props.onRegister) {
+            this.props.onRegister(user);
+          }
+        },
+        error: function(user, error) {
+          if (this.props.onError) {
+            this.props.onError(error.message);
+          }
+        }
+      });
+    }
+    else if (this.props.onError) {
+      this.props.onError("Password and confirmation do not match.");
+    }
   }
 }
