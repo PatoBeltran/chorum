@@ -23,7 +23,7 @@ export default class Registration extends React.Component {
         <input className='form-control' type='text' value={this.state.password} onChange={this.handlePasswordChange}></input>
         <label>Confirm:</label>
         <input className='form-control' type='text' value={this.state.confirmPassword} onChange={this.handleConfirmChange}></input>
-        <button type='button' className='btn btn-success' type='button' onClick={this.registerUser}>Sign up</button>
+        <button type='button' className='btn btn-success' onClick={this.registerUser}>Sign up</button>
       </form>
     );
   }
