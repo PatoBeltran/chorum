@@ -1,8 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import './css/main.css';
+import '!style!css!bootstrap/dist/css/bootstrap.css';
+import '!style!css!./css/main.css';
 
 import React from 'react';
 import App from './components/App.jsx';
+import Parse from 'parse';
 
 main();
 

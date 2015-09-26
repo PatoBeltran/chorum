@@ -46,20 +46,13 @@ export default class Registration extends React.Component {
   }
   registerUser() {
     if (this.state.password === this.state.confirmPassword) {
-      var user = new Parse.User();
+      const user = new Parse.User();
       user.set("email", this.state.email);
       user.set("password", this.state.password);
 
       user.signUp(null, {
-        success: function(user) {
-          if (this.props.onRegister) {
-            this.props.onRegister(user);
-          }
-        },
-        error: function(user, error) {
-          if (this.props.onError) {
-            this.props.onError(error.message);
-          }
+        error: (user, error) => {
+          // TODO: show error message
         }
       });
     }

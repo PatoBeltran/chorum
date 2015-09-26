@@ -2,8 +2,7 @@ import React from 'react';
 import Registration from './Registration.jsx';
 import { Router, Route, Link } from 'react-router';
 import Parse from 'parse';
-
-import 'css!./bootstrap/dist/css/bootstrap.css';
+// import Repository from './Repository.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -18,12 +17,13 @@ export default class App extends React.Component {
       return <LandingPage onLogin={(currentUser) => this.setState({ currentUser })}></LandingPage>
     }
 
-    <Router>
-      <Route path="/" component={App}>
-        <Route path="/:repoId" component={About}/>
-        <Route path="*" component={NoMatch}/>
-      </Route>
-    </Router>
+    return <div>Logged In</div>;
+
+    // <Router>
+    //   <Route path="/" component={Repositories}>
+    //     <Route path=":username/:repoId" component={Repository}/>
+    //   </Route>
+    // </Router>
   }
 }
 
