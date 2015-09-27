@@ -34,7 +34,7 @@ module.exports = merge(common, {
         loaders: ['react-hot', 'babel'],
         include: path.resolve(ROOT_PATH, 'src')
       },
-      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+      { test: /\.(woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
     ]
   },
   devServer: {
