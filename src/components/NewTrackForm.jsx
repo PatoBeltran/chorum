@@ -43,7 +43,7 @@ export default class NewTrackForm extends React.Component {
               </div>
               <div className="form-group">
                 <label>Track:</label> 
-                <span><input ref='fileInput' type='file' accept='.mp3' onChange={this.handleFileChange}></input></span>
+                <span><input ref='fileInput' type='file' accept='.wav' onChange={this.handleFileChange}></input></span>
               </div>
             </form>
           </Modal.Body>
@@ -79,7 +79,7 @@ export default class NewTrackForm extends React.Component {
     track.set('project', this.props.project); 
 
     const audioFile = new Parse.Object('AudioFile');
-    audioFile.set('file', new Parse.File('audiofile.mp3', this.state.file));
+    audioFile.set('file', new Parse.File('audiofile.wav', this.state.file));
 
     const audio = new Parse.Object('Audio');
     audio.set('version', 1);
@@ -89,7 +89,7 @@ export default class NewTrackForm extends React.Component {
 
     audio.save(null, {
       success: () => {
-        this.props.onTrackAdded(track);
+        this.props.onTrackAdded(track, audioFile);
         this.setState({
           name: '',
           type: 'Vocals',
