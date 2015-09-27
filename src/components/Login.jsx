@@ -11,6 +11,7 @@ export default class LogIn extends React.Component {
 
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.signIn = this.signIn.bind(this);
   }
   
   render() {
@@ -38,7 +39,7 @@ export default class LogIn extends React.Component {
   }
 
   signIn() {
-    user.signIn(this.state.email, this.state.password, {
+    Parse.User.logIn(this.state.email, this.state.password, {
       success: (user) => {
         if (this.props.onLogin) {
           this.props.onLogin(user);

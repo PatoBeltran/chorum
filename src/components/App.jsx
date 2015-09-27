@@ -5,7 +5,7 @@ import Parse from 'parse';
 import LandingPage from './LandingPage.jsx';
 // import Repository from './Repository.jsx';
 import Navbar from './Navbar.jsx';
-import HomePage from './HomePage.jsx';
+import ProjectsPage from './ProjectsPage.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,23 +14,32 @@ export default class App extends React.Component {
     this.state = {
       currentUser: Parse.User.current()
     };
+
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
   render() {
     if (!this.state.currentUser) {
-      return <LandingPage onLogin={(currentUser) => this.setState({ currentUser })}></LandingPage>
+      return <LandingPage onLogin={this.handleLogin}></LandingPage>
     }
-
-    console.log(Router);
 
     return (
       <div>
-        <Navbar onLogOut={this.onLogOut} />
+        <Navbar onLogOut={this.handleLogout} />
         <Router>
-          <Route path="/" component={HomePage}>
-          </Route>
+          <Route path="/projects" component={ProjectsPage} />
+          {/*<Route path="/tracks" component={TracksPage} />*/}
         </Router>
       </div>
     );
+  }
+  handleLogin(currentUser) {
+    this.setState({ currentUser });
+    window.location.href = '#/projects';
+  }
+  handleLogout() {
+    this.setState({ currentUser: null });
+    window.location.href = '#/';
   }
 }
 
