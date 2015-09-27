@@ -20,8 +20,6 @@ export default class App extends React.Component {
       return <LandingPage onLogin={(currentUser) => this.setState({ currentUser })}></LandingPage>
     }
 
-    console.log(Router);
-
     return (
       <div>
         <Navbar onLogOut={this.onLogOut} />

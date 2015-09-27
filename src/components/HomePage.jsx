@@ -24,7 +24,7 @@ export default class HomePage extends React.Component {
             <div>
               <button className='btn btn-success' onClick={this.open}>Create new project</button>
             </div>
-            <Gravatar email={this.user.email} size="100" rating="pg" />
+            <Gravatar email={this.user.getEmail()} size={100} rating="pg" />
             <Repositories></Repositories>
           </div>
           <NewProject show={this.state.showNewProjectModal} onHide={this.close} />
