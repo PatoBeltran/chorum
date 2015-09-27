@@ -82,4 +82,9 @@ body {
   color: #bf2718;
 }
 
-
+.play-transition {
+  -webkit-transition: 10s ease-in-out;
+  -moz-transition: 10s ease-in-out;
+  -o-transition: 10s ease-in-out;
+  transition: 10s ease-in-out;
+}
