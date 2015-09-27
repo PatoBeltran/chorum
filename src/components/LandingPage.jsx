@@ -4,7 +4,7 @@ import ParseReact from 'parse-react';
 import Parallax from 'react-parallax'
 
 import Registration from './Registration.jsx';
-import LogIn from './LogIn.jsx';
+import LogIn from './Login.jsx';
 import Alert from './Alert.jsx';
 
 export default class LandingPage extends React.Component {

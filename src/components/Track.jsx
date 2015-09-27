@@ -13,7 +13,6 @@ export default class Track extends React.Component {
   }
   render() {
     const percentage = (this.props.sound._duration / this.props.max) * (9/12);
-    console.log(percentage*100);
     const formatPercentage = percentage * 100 + '%';
     const types = ['Vocals', 'Guitar', 'Drums', 'Piano', 'Other'];
 
@@ -24,13 +23,25 @@ export default class Track extends React.Component {
       'piano': '#6B6363'
     }[this.props.track.get('type').toLowerCase()] || '#B3ACA6';
 
+    const imgSrc = {
+      'vocals': 'https://s3-us-west-2.amazonaws.com/chorum/microphone.png',
+      'guitar': 'https://s3-us-west-2.amazonaws.com/chorum/guitar.png ',
+      'drums': 'https://s3-us-west-2.amazonaws.com/chorum/drum.png',
+      'piano': 'https://s3-us-west-2.amazonaws.com/chorum/piano.png'
+    }[this.props.track.get('type').toLowerCase()] || 'https://s3-us-west-2.amazonaws.com/chorum/music.png';
+
     return (
       <div className='row' style={{padding: '10px 0'}}>
-        <div className='col-xs-3' style={{ overflow: 'hidden' }}>
-        <button type='button' className='btn btn-default' onClick={this.play}>{this.props.track.get('name')}</button>
-        {this.props.track.get('type')}
+        <div className='col-xs-2 col-xs-offset-1' style={{ overflow: 'hidden' }}>
+          <a onClick={this.play} style={{ cursor: 'pointer' }}>
+          {/*{this.props.track.get('type')}*/}
+          <image src={imgSrc} width='40px'/>
+          </a>
+          <span style={{ margin: '10px' }}>
+            {this.props.track.get('name')}
+          </span>
         </div>
-        <div className='col-xs-9' style={{ backgroundColor: barColor, width: formatPercentage, padding: '0'}}>
+        <div className='col-xs-9' style={{ backgroundColor: barColor, width: formatPercentage, padding: '0', borderRadius: '5px'}}>
           <br />
           <br />
         </div>
@@ -39,5 +50,6 @@ export default class Track extends React.Component {
   }
   play() {
     this.props.sound.play();
+    this.props.onPlay(this.props.sound._duration);
   }
 }

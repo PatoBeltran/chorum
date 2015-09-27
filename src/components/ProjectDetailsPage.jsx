@@ -16,7 +16,7 @@ export default class ProjectsPage extends React.Component {
       showCollabForm: false,
       showTrackForm: false,
       sounds: {},
-      playingAll: false
+      playing: false
     };
 
     this.maxLength = 1;
@@ -59,12 +59,14 @@ export default class ProjectsPage extends React.Component {
                 const sound = new howler.Howl({
                   urls: [this.trackToAudio[track.id]],
                   onload: () => {
-                    const sounds = this.state.sounds;
-                    sounds[track.id] = sound;
-                    if (sound._duration > this.maxLength) {
-                      this.maxLength = sound._duration;
-                    }
-                    this.setState({ sounds });
+                    setTimeout(() => {
+                      const sounds = this.state.sounds;
+                      sounds[track.id] = sound;
+                      if (sound._duration > this.maxLength) {
+                        this.maxLength = sound._duration;
+                      }
+                      this.setState({ sounds });
+                    }, 1);
                   }
                 });
 
@@ -94,13 +96,21 @@ export default class ProjectsPage extends React.Component {
   render() {
     const button = this.state.project ? <button type='button' className='btn btn-success' style={{ display: 'inline-block', width: '95%', margin: '15px', height: '100px', backgroundColor: '#EBEBEB', border: '2px dashed gray', color: '#9B9B9B', fontSize: 'x-large'}} onClick={() => this.setState({ showTrackForm: true })}>Add a track</button> : '';
     const filterTracks = (track) => this.state.sounds[track.id];
-    const renderTrack = (track) => <Track track={track} url={this.trackToAudio[track.id]} sound={this.state.sounds[track.id]} max={this.maxLength}/>
-    const linePosition = this.state.playingAll ? '75%' : '0';
+    const onSinglePlay = (duration) => {
+      this.setState({ playing: true });
+      setTimeout(() => {
+        this.setState({ playing: false });
+      }, duration * 1000);
+    }
+    const renderTrack = (track) => <Track onPlay={onSinglePlay} track={track} url={this.trackToAudio[track.id]} sound={this.state.sounds[track.id]} max={this.maxLength}/>
+    const linePosition = this.state.playing ? '74.7%' : '-.7%';
     const collabButton = this.state.project ? 
     (<a style={{ color: '#F0F0F0', float: 'left', display: 'inline-block', marginTop: "5px", marginLeft: "2px" }} onClick={() => this.setState({ showCollabForm: true })}>
       <FontAwesome name='plus-circle' size='2x'/>
     </a>) :
     '';
+
+    const transition = this.state.playing ? `${this.maxLength}s linear` : '';
 
     return (
       <div>
@@ -127,7 +137,7 @@ export default class ProjectsPage extends React.Component {
         </div>
         <div className='col-xs-offset-1 col-xs-10'>
           <div style={{ position: 'relative' }}>
-            <div className='col-xs-offset-3 col-xs-8 play-transition' style={{ padding: '0', height: '100%', width: '1px', position: 'absolute', top: '0', left: linePosition, zIndex: '10', backgroundColor: 'black', transition: `${this.maxLength}s linear` }} />
+            <div className='col-xs-offset-3 col-xs-8' style={{ padding: '0', height: '100%', width: '1px', position: 'absolute', top: '0', left: linePosition, zIndex: '10', backgroundColor: 'black', transition }} />
             {this.state.tracks.filter(filterTracks).map(renderTrack)}
           </div>
           <NewTrackForm project={this.state.project} show={this.state.showTrackForm} onTrackAdded={this.onTrackAdded} />
@@ -181,7 +191,10 @@ export default class ProjectsPage extends React.Component {
     this.state.tracks.forEach((track) => {
       this.state.sounds[track.id].play();
     });
-    this.setState({ playingAll: true })
+    this.setState({ playing: true });
+    setTimeout(() => {
+      this.setState({ playing: false });
+    }, this.maxLength * 1000);
   }
 
   closeNewTrackForm(){

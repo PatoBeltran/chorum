@@ -25,7 +25,7 @@ export default class LogIn extends React.Component {
           <label>Password:</label>
           <input className='form-control' type='password' value={this.state.password} onChange={this.handlePasswordChange}></input>
         </div>
-        <button type='button' className='btn btn-success' onClick={this.signIn}>Login!</button>
+        <button type='submit' className='btn btn-success' onClick={this.signIn}>Login!</button>
       </form>
     );
   }
@@ -39,6 +39,7 @@ export default class LogIn extends React.Component {
   }
 
   signIn() {
+    event.preventDefault();
     Parse.User.logIn(this.state.email, this.state.password, {
       success: (user) => {
         if (this.props.onLogin) {
