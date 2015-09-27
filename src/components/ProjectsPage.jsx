@@ -1,7 +1,6 @@
 import React from 'react';
 import Parse from 'parse';
 import ParseReact from 'parse-react';
-import Gravatar from 'react-gravatar';
 import Repositories from './Repositories.jsx';
 import NewProject from './NewProject.jsx'
 
@@ -20,13 +19,7 @@ export default class ProjectsPage extends React.Component {
   render() {
     return (
         <div>
-          <div>
-            <div>
-              <button className='btn btn-success' onClick={this.open}>Create new project</button>
-            </div>
-            <Gravatar email={this.user.getEmail()} size={100} rating="pg" />
-            <Repositories></Repositories>
-          </div>
+          <Repositories></Repositories>
           <NewProject show={this.state.showNewProjectModal} onHide={this.close} />
         </div>
     );

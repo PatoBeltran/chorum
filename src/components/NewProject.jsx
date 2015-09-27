@@ -60,7 +60,14 @@ export default class NewProject extends React.Component {
                 </div>
                 <div className="form-group">
                   <label>Tempo:</label> 
-                  <span><input className='form-control' type='number' value={this.state.tempo} onChange={this.handleTempoChange}></input></span><span><strong>BPM</strong></span>
+                  <div className="row">
+                    <div className="col-md-10">
+                      <input className='form-control' type='number' value={this.state.tempo} onChange={this.handleTempoChange}></input>
+                    </div>
+                    <div className="col-md-2">
+                      <strong style={{ lineHeight: "35px" }}>BPM</strong>
+                    </div>
+                  </div>
                 </div>
               </form>
             </Modal.Body>
@@ -95,7 +102,7 @@ export default class NewProject extends React.Component {
 
       project.set("name", this.state.name);
       project.set("key", this.state.key);
-      project.set("tempo", this.state.tempo);
+      project.set("tempo", parseInt(this.state.tempo));
 
       project.save(null, {
         success: (project) => {
