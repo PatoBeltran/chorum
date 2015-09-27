@@ -25,7 +25,7 @@ export default class LogIn extends React.Component {
           <label>Password:</label>
           <input className='form-control' type='password' value={this.state.password} onChange={this.handlePasswordChange}></input>
         </div>
-        <button type='button' className='btn btn-success' onClick={this.signIn}>Sign up</button>
+        <button type='button' className='btn btn-success' onClick={this.signIn}>Login!</button>
       </form>
     );
   }
