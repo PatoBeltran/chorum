@@ -33,7 +33,7 @@ export default class Registration extends React.Component {
           <label>Confirm password:</label>
           <input className='form-control' type='password' value={this.state.confirmPassword} onChange={this.handleConfirmChange}></input>
         </div>
-        <button type='button' className='btn btn-success' onClick={this.registerUser}>Sign up</button>
+        <button type='submit' className='btn btn-success' onClick={this.registerUser}>Sign up</button>
       </form>
     );
   }
@@ -51,6 +51,7 @@ export default class Registration extends React.Component {
   }
 
   registerUser() {
+    event.preventDefault();
     if (this.state.password === this.state.confirmPassword) {
       const user = new Parse.User();
       user.set("username", this.state.email);

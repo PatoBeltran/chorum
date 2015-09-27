@@ -53,8 +53,11 @@ export default class Navbar extends React.Component {
       this.props.onLogOut();
     }
   }
-  close() {
+  close(project) {
     this.setState({ showNewProjectModal: false });
+    if (project) {
+      location.hash = `#/projects/${this.user.id}/${project.id}`;
+    }
   }
 
   open() {

@@ -11,6 +11,7 @@ export default class NewProject extends React.Component {
       key: '',
       tempo: 120
     };
+
     this.user = Parse.User.current();
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -106,10 +107,7 @@ export default class NewProject extends React.Component {
 
       project.save(null, {
         success: (project) => {
-          this.props.onHide();
-          if (this.props.onProjectCreate) {
-            this.props.onProjectCreate();
-          }
+          this.props.onHide(project);
         },
         error: (project, error) => {
           if (this.props.onError) {

@@ -20,19 +20,15 @@ export default class ProjectsPage extends React.Component {
     return (
         <div>
           <Repositories></Repositories>
-          <NewProject show={this.state.showNewProjectModal} onHide={this.close} />
         </div>
     );
   }
 
-  close() {
+  close(project) {
     this.setState({ showNewProjectModal: false });
   }
 
   open() {
     this.setState({ showNewProjectModal: true });
   }
-
 }
-
-
