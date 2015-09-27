@@ -1,13 +1,27 @@
 import React from 'react';
 import Parse from 'parse';
 import ParseReact from 'parse-react';
+import FontAwesome from 'react-fontawesome';
+import Repository from './Repository.jsx'
 
 export default class Repositories extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      projects: []
+      projects: [],
     };
+    this.style = {
+      repoContainer: {
+        padding: "40px",
+        paddingTop: "20px"
+      },
+      reposList: {
+        padding: "0",
+        margin: "0",
+        listStyle: "none"
+      }
+    }
+
     this.user = Parse.User.current();
     this.renderRepository = this.renderRepository.bind(this);
   }
@@ -18,21 +32,21 @@ export default class Repositories extends React.Component {
     query.find({
       success: (projects) =>{
         this.setState({projects});
+
       }});
   }
   render() {
-    console.log(this.state.projects);
     return (
-      <div>
-        <ul>
-        {(this.state.projects) ? this.state.projects.map(this.renderRepository) : ''}
+      <div style={this.style.repoContainer}>
+        <ul style={this.style.reposList}>
+        { (this.state.projects) ? this.state.projects.map(this.renderRepository) : '' }
         </ul>
       </div>
     );
   }
 
   renderRepository(repo) {
-    return <li><a href={`#/projects/${this.user.id}/${repo.id}`}>{ repo.get("name") }</a></li>
+    return <Repository repo={repo}></Repository>
   }
 }
 
