@@ -43,7 +43,7 @@ export default class NewTrackForm extends React.Component {
               </div>
               <div className="form-group">
                 <label>Track:</label> 
-                <span><input ref='fileInput' type='file' accept='.mp3' onChange={this.handleFileChange}></input></span>
+                <span><input ref='fileInput' type='file' accept='.m4a' onChange={this.handleFileChange}></input></span>
               </div>
             </form>
           </Modal.Body>
@@ -79,23 +79,31 @@ export default class NewTrackForm extends React.Component {
     track.set('project', this.props.project); 
 
     const audioFile = new Parse.Object('AudioFile');
-    audioFile.set('file', new Parse.File('audiofile.mp3', this.state.file));
+    
+    const reader = new FileReader();
 
-    const audio = new Parse.Object('Audio');
-    audio.set('version', 1);
-    audio.set('startTime', '0');
-    audio.set('audio', audioFile);
-    audio.set('track', track);
+    reader.onloadend = () => {
+      console.log(reader.result);
+      audioFile.set('file', new Parse.File('audiofile.txt', { base64: reader.result }));
 
-    audio.save(null, {
-      success: () => {
-        this.props.onTrackAdded(track);
-        this.setState({
-          name: '',
-          type: 'Vocals',
-          file: null
-        })
-      }
-    });
+      const audio = new Parse.Object('Audio');
+      audio.set('version', 1);
+      audio.set('startTime', '0');
+      audio.set('audio', audioFile);
+      audio.set('track', track);
+
+      audio.save(null, {
+        success: () => {
+          this.props.onTrackAdded(track, audioFile);
+          this.setState({
+            name: '',
+            type: 'Vocals',
+            file: null
+          })
+        }
+      });
+    }
+
+    reader.readAsDataURL(this.state.file);
   }
 }
