@@ -74,6 +74,7 @@ export default class LandingPage extends React.Component {
     return (
         <div className="row">
           <div className="col-md-6" style={this.styles.callToAction}>
+          <img className="img-responsive" src="https://s3-us-west-2.amazonaws.com/chorum/logo.png" />
           <h1 style={this.styles.ctah1}>Where Music is built</h1>
           <h2 style={this.styles.ctah21}>We simplify the sharing and collaboration of music creation.</h2>
           <h2 style={this.styles.ctah2}>Share your tracks and build great music with your peers.</h2>
