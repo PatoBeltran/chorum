@@ -6,24 +6,34 @@ export default class Repositories extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      projects: []
     };
     this.user = Parse.User.current();
+    this.renderRepository = this.renderRepository.bind(this);
   }
-  
+  componentDidMount() {
+    var query = new Parse.Query("Project");
+    query.equalTo("collaborators", Parse.User.current());
+
+    query.find({
+      success: (projects) =>{
+        this.setState({projects});
+      }});
+  }
   render() {
+    console.log(this.state.projects);
     return (
         <div>
           <ul>{ 
-              (this.user.projects) ? this.user.projects.map(this.renderRepository) : ""
-              }
+            (this.state.projects) ? this.state.projects.map(this.renderRepository) : ""
+          }
           </ul>
         </div>
-    );
+        )
   }
 
   renderRepository(repo) {
-    <li><a href={`#/${this.user.id}/${repo.id}`}>{ repo.name }</a></li>
+    return <li><a href={`#/${this.user.id}/${repo.id}`}>{ repo.get("name") }</a></li>
   }
 }
 
