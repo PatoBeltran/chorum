@@ -5,16 +5,7 @@ import Parse from 'parse';
 import LandingPage from './LandingPage.jsx';
 // import Repository from './Repository.jsx';
 import Navbar from './Navbar.jsx';
-
-class Repositories extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return <div>Repositories</div>;
-  }
-}
+import HomePage from './HomePage.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -34,7 +25,10 @@ export default class App extends React.Component {
     return (
       <div>
         <Navbar onLogOut={this.onLogOut} />
-        <Repositories />
+        <Router>
+          <Route path="/" component={HomePage}>
+          </Route>
+        </Router>
       </div>
     );
   }
