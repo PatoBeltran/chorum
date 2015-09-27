@@ -31,7 +31,7 @@ export default class App extends React.Component {
           <Redirect from="/" to="/projects" />
           <Route path="/projects" component={ProjectsPage}>
           </Route>
-            <Route path="/projects/:projectId" component={ProjectDetailsPage} />
+            <Route path="/projects/:userId/:projectId" component={ProjectDetailsPage} />
           <Route path="/tracks" component={TracksPage} />
         </Router>
       </div>
