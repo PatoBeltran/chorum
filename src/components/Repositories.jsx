@@ -23,17 +23,16 @@ export default class Repositories extends React.Component {
   render() {
     console.log(this.state.projects);
     return (
-        <div>
-          <ul>{ 
-            (this.state.projects) ? this.state.projects.map(this.renderRepository) : ""
-          }
-          </ul>
-        </div>
-        )
+      <div>
+        <ul>
+        {(this.state.projects) ? this.state.projects.map(this.renderRepository) : ''}
+        </ul>
+      </div>
+    );
   }
 
   renderRepository(repo) {
-    return <li><a href={`#/${this.user.id}/${repo.id}`}>{ repo.get("name") }</a></li>
+    return <li><a href={`#/projects/${this.user.id}/${repo.id}`}>{ repo.get("name") }</a></li>
   }
 }
 
