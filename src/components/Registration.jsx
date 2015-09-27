@@ -1,6 +1,8 @@
 import React from 'react';
 import Parse from 'parse';
 
+import Alert from './Alert.jsx';
+
 export default class Registration extends React.Component {
   constructor(props) {
     super(props);

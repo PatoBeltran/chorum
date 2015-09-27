@@ -16,6 +16,8 @@ export default class NewProject extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleKeyChange = this.handleKeyChange.bind(this);
     this.handleTempoChange = this.handleTempoChange.bind(this);
+
+    this.createProject = this.createProject.bind(this);
   }
   
   render() {
@@ -65,7 +67,7 @@ export default class NewProject extends React.Component {
 
             <Modal.Footer>
               <Button onClick={this.props.onHide}>Close</Button>
-              <Button bsStyle="primary" onClick={this.props.createProject}>Create</Button>
+              <Button bsStyle="primary" onClick={this.createProject}>Create</Button>
             </Modal.Footer>
           </Modal>
         </div>
@@ -85,5 +87,32 @@ export default class NewProject extends React.Component {
   }
 
   createProject() {
+    if (this.state.name) {
+      var project = new Parse.Object("Project");
+
+      var relation = project.relation("collaborators");
+      relation.add(this.user);
+
+      project.set("name", this.state.name);
+      project.set("key", this.state.key);
+      project.set("tempo", this.state.tempo);
+
+      project.save(null, {
+        success: (project) => {
+          this.props.onHide();
+          if (this.props.onProjectCreate) {
+            this.props.onProjectCreate();
+          }
+        },
+        error: (project, error) => {
+          if (this.props.onError) {
+            this.props.onError(error.message);
+          }
+        }
+      }); 
+    }
+    if (this.props.onError) {
+      this.props.onError("Name should not be empty.");
+    }
   }
 }
