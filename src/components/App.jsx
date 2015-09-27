@@ -1,11 +1,12 @@
 import React from 'react';
 import Registration from './Registration.jsx';
-import { Router, Route, Link } from 'react-router';
+import { Router, Route, Redirect } from 'react-router';
 import Parse from 'parse';
 import LandingPage from './LandingPage.jsx';
-// import Repository from './Repository.jsx';
 import Navbar from './Navbar.jsx';
 import ProjectsPage from './ProjectsPage.jsx';
+import TracksPage from './TracksPage.jsx';
+import ProjectDetailsPage from './ProjectDetailsPage.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,19 +28,20 @@ export default class App extends React.Component {
       <div>
         <Navbar onLogOut={this.handleLogout} />
         <Router>
-          <Route path="/projects" component={ProjectsPage} />
-          {/*<Route path="/tracks" component={TracksPage} />*/}
+          <Redirect from="/" to="/projects" />
+          <Route path="/projects" component={ProjectsPage}>
+          </Route>
+            <Route path="/projects/:projectId" component={ProjectDetailsPage} />
+          <Route path="/tracks" component={TracksPage} />
         </Router>
       </div>
     );
   }
   handleLogin(currentUser) {
     this.setState({ currentUser });
-    window.location.href = '#/projects';
   }
   handleLogout() {
     this.setState({ currentUser: null });
-    window.location.href = '#/';
   }
 }
 

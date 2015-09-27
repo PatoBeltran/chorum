@@ -5,7 +5,7 @@ import Gravatar from 'react-gravatar';
 import Repositories from './Repositories.jsx';
 import NewProject from './NewProject.jsx'
 
-export default class HomePage extends React.Component {
+export default class ProjectsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
