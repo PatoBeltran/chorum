@@ -8,7 +8,7 @@ export default class NewProject extends React.Component {
     super(props);
     this.state = {
       name: '',
-      key: '',
+      key: "C",
       tempo: 120
     };
     this.user = Parse.User.current();
