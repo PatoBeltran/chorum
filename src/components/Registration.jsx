@@ -1,6 +1,5 @@
 import React from 'react';
 import Parse from 'parse';
-import ParseReact from 'parse-react';
 
 export default class Registration extends React.Component {
   constructor(props) {
@@ -57,12 +56,12 @@ export default class Registration extends React.Component {
       user.set("password", this.state.password);
 
       user.signUp(null, {
-        success: function (user) {
+        success: (user) => {
           if (this.props.onRegister) {
             this.props.onRegister(user);
           }
         },
-        error: function (user, error) {
+        error: (user, error) => {
           if (this.props.onError) {
             this.props.onError(error.message);
           }
