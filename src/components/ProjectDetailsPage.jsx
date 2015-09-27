@@ -3,6 +3,7 @@ import Parse from 'parse';
 import NewTrackForm from './NewTrackForm.jsx';
 import Track from './Track.jsx';
 import howler from 'howler';
+import FontAwesome from 'react-fontawesome';
 
 export default class ProjectsPage extends React.Component {
   constructor(props) {
@@ -76,21 +77,43 @@ export default class ProjectsPage extends React.Component {
   }
   
   render() {
-    const button = this.state.project ? <button type='button' className='btn btn-success' style={{width: '100%', margin: '15px', height: '100px', backgroundColor: '#EBEBEB', border: '2px dashed gray', color: '#9B9B9B', fontSize: 'x-large'}} onClick={() => this.setState({ showTrackForm: true })}>Add a track</button> : '';
+    const button = this.state.project ? <button type='button' className='btn btn-success' style={{ display: 'inline-block', width: '95%', margin: '15px', height: '100px', backgroundColor: '#EBEBEB', border: '2px dashed gray', color: '#9B9B9B', fontSize: 'x-large'}} onClick={() => this.setState({ showTrackForm: true })}>Add a track</button> : '';
     const filterTracks = (track) => this.state.sounds[track.id];
     const renderTrack = (track) => <Track track={track} url={this.trackToAudio[track.id]} sound={this.state.sounds[track.id]} max={this.maxLength}/>
     const linePosition = this.state.playingAll ? '75%' : '0';
 
     return (
+      <div>
+        <div className='col-xs-12' style={{ marginBottom: '20px', padding: '0px', backgroundImage: 'url("https://s3-us-west-2.amazonaws.com/chorum/cover.png")', height: '150px' }}>
+          <div className='col-xs-2' style={{ height: '100%' }}>
+            <a className='btn' style={{ width: '100%', height: '100%', color: '#F0F0F0' }} onClick={this.playAll}>
+              <FontAwesome name='play-circle' size='5x' style={{ lineHeight: '140px' }} />
+            </a>
+          </div>
+          <div className='col-xs-10' style={{ color: 'white' }}>
+            <div className='pull-right' style={{ margin: '40px', fontSize: 'x-large'}}>
+              {this.state.project ? this.state.project.get('tempo') + 'MBP | ' + this.state.project.get('key'): ''}
+            </div>
+            <div style={{ fontSize: 'xx-large', marginTop: '20px' }}>
+              {this.state.project ? this.state.project.get('name') : ''}
+            </div>
+            <div>
+              Perfiles
+            </div>
+          </div>
+        </div>
         <div className='col-xs-offset-1 col-xs-10'>
           <div style={{ position: 'relative' }}>
             <div className='col-xs-offset-3 col-xs-8 play-transition' style={{ padding: '0', height: '100%', width: '1px', position: 'absolute', top: '0', left: linePosition, zIndex: '10', backgroundColor: 'black', transition: `${this.maxLength}s linear` }} />
-            <button type='button' className='btn btn-success' onClick={this.playAll}>Play All</button>
             {this.state.tracks.filter(filterTracks).map(renderTrack)}
           </div>
-          {button}
           <NewTrackForm project={this.state.project} show={this.state.showTrackForm} onTrackAdded={this.onTrackAdded} />
         </div>
+        <div className='center-block' style={{ textAlign: 'center' }}>
+        {button}
+        </div>
+      </div>
+        
     );
   }
   onTrackAdded(track, audioFile) {

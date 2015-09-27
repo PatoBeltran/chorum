@@ -82,6 +82,10 @@ body {
   color: #bf2718;
 }
 
+.navbar {
+  margin-bottom: 0 !important;
+}
+
 .play-transition {
   -webkit-transition: 10s ease-in-out;
   -moz-transition: 10s ease-in-out;
