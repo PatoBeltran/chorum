@@ -13,6 +13,7 @@ export default class ProjectsPage extends React.Component {
 
     this.onTrackAdded = this.onTrackAdded.bind(this);
     this.playAll = this.playAll.bind(this);
+    this.closeNewTrackForm = this.closeNewTrackForm.bind(this);
   }
   componentDidMount() {
     const projectQuery = new Parse.Query('Project');
@@ -30,6 +31,7 @@ export default class ProjectsPage extends React.Component {
       }
     });
   }
+  
   render() {
     const button = this.state.project ? <button type='button' className='btn btn-success' value='Add Track' onClick={() => this.setState({ showTrackForm: true })}>Add Track</button> : '';
     return (
@@ -37,17 +39,23 @@ export default class ProjectsPage extends React.Component {
         <button type='button' className='btn btn-success' onClick={this.playAll}>Play All</button>
           {this.state.tracks.map((track) => <Track track={track}  />)}
           {button}
-          <NewTrackForm project={this.state.project} show={this.state.showTrackForm} onTrackAdded={this.onTrackAdded} />
+          <NewTrackForm project={this.state.project} show={this.state.showTrackForm} onTrackAdded={this.onTrackAdded} onHide={this.closeNewTrackForm} />
         </div>
     );
   }
+  
   onTrackAdded(track) {
     this.setState({
       tracks: [...this.state.tracks, track],
       showTrackForm: false
     });
   }
+  
   playAll() {
     
+  }
+
+  closeNewTrackForm(){
+    this.setState({showTrackForm: false});
   }
 }
