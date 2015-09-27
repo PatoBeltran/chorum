@@ -1,6 +1,7 @@
 import React from 'react';
 import Parse from 'parse';
 import NewTrackForm from './NewTrackForm.jsx';
+import Track from './Track.jsx';
 
 export default class ProjectsPage extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class ProjectsPage extends React.Component {
     };
 
     this.onTrackAdded = this.onTrackAdded.bind(this);
+    this.playAll = this.playAll.bind(this);
   }
   componentDidMount() {
     const projectQuery = new Parse.Query('Project');
@@ -32,19 +34,20 @@ export default class ProjectsPage extends React.Component {
     const button = this.state.project ? <button type='button' className='btn btn-success' value='Add Track' onClick={() => this.setState({ showTrackForm: true })}>Add Track</button> : '';
     return (
         <div>
-          {this.state.tracks.map(this.renderTrack)}
+        <button type='button' className='btn btn-success' onClick={this.playAll}>Play All</button>
+          {this.state.tracks.map((track) => <Track track={track}  />)}
           {button}
           <NewTrackForm project={this.state.project} show={this.state.showTrackForm} onTrackAdded={this.onTrackAdded} />
         </div>
     );
-  }
-  renderTrack(track) {
-    return <div>{track.get("name")}</div>;
   }
   onTrackAdded(track) {
     this.setState({
       tracks: [...this.state.tracks, track],
       showTrackForm: false
     });
+  }
+  playAll() {
+    
   }
 }
