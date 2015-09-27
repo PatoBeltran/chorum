@@ -76,9 +76,8 @@ export default class Repository extends React.Component {
             </a>
             </div>
             <div className="col-md-12" style={{color: "white"}}>
-            <div className="col-md-2"><a style={ this.style.repoLinkStyle } onClick={this.playRepo(this.repo)}><FontAwesome name="play-circle" size="2x" /></a></div>
-            <div className="col-md-8"></div>
-            <div className="col-md-2"><a style={ this.style.repoLinkStyle } onClick={this.editRepo(this.repo)} href={`#/projects/${this.user.id}/${this.repo.id}`}><FontAwesome name="pencil" size="2x" /></a></div>
+            <div className="col-md-10"></div>
+            <div className="col-md-2"><a style={ this.style.repoLinkStyle } href={`#/projects/${this.user.id}/${this.repo.id}`}><FontAwesome name="pencil" size="2x" /></a></div>
           </div>
         </li>
         );
@@ -87,17 +86,5 @@ export default class Repository extends React.Component {
     return this.state.users.map((user) => { 
       return <Gravatar className="img-circle" style={{ marginTop: "5px", marginRight: "2px" }} email={user.getEmail()} size={25} rating="pg" />
     });
-  }
-
-  playRepo(repo) {
-    return () => {
-      console.log("should play all");
-    }
-  }
-
-  editRepo(repo) {
-    return () => {
-      console.log("should go to repo");
-    }
   }
 }
