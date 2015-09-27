@@ -30,7 +30,7 @@ export default class Registration extends React.Component {
           <input className='form-control' type='password' value={this.state.password} onChange={this.handlePasswordChange}></input>
         </div>
         <div className="form-group">
-          <label>Confirm:</label>
+          <label>Confirm password:</label>
           <input className='form-control' type='password' value={this.state.confirmPassword} onChange={this.handleConfirmChange}></input>
         </div>
         <button type='button' className='btn btn-success' onClick={this.registerUser}>Sign up</button>
