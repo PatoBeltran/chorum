@@ -19,6 +19,7 @@ export default class ProjectsPage extends React.Component {
 
     this.onTrackAdded = this.onTrackAdded.bind(this);
     this.playAll = this.playAll.bind(this);
+    this.closeNewTrackForm = this.closeNewTrackForm.bind(this);
   }
   componentDidMount() {
     const projectQuery = new Parse.Query('Project');
@@ -72,6 +73,7 @@ export default class ProjectsPage extends React.Component {
       }
     });
   }
+  
   render() {
     const button = this.state.project ? <button type='button' className='btn btn-success' value='Add Track' onClick={() => this.setState({ showTrackForm: true })}>Add Track</button> : '';
     const filterTracks = (track) => this.state.sounds[track.id];
@@ -108,9 +110,14 @@ export default class ProjectsPage extends React.Component {
       }
     });
   }
+  
   playAll() {
     this.state.tracks.forEach((track) => {
       this.state.sounds[track.id].play()
     });
+  }
+
+  closeNewTrackForm(){
+    this.setState({showTrackForm: false});
   }
 }
