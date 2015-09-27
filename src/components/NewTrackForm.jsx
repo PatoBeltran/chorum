@@ -24,7 +24,7 @@ export default class NewTrackForm extends React.Component {
 
     return (
       <div className="static-modal">
-        <Modal show={this.props.show} onHide={() => 0}>
+        <Modal show={this.props.show} onHide={this.props.onHide}>
           <Modal.Header>
             <Modal.Title>New Track</Modal.Title>
           </Modal.Header>

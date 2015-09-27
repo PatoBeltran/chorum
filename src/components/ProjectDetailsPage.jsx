@@ -130,7 +130,7 @@ export default class ProjectsPage extends React.Component {
             <div className='col-xs-offset-3 col-xs-8 play-transition' style={{ padding: '0', height: '100%', width: '1px', position: 'absolute', top: '0', left: linePosition, zIndex: '10', backgroundColor: 'black', transition: `${this.maxLength}s linear` }} />
             {this.state.tracks.filter(filterTracks).map(renderTrack)}
           </div>
-          <NewTrackForm project={this.state.project} show={this.state.showTrackForm} onTrackAdded={this.onTrackAdded} />
+          <NewTrackForm project={this.state.project} show={this.state.showTrackForm} onTrackAdded={this.onTrackAdded} onHide={this.closeNewTrackForm} />
           <NewCollabForm project={this.state.project} show={this.state.showCollabForm} onCollabAdded={this.onCollabAdded} onHide={this.closeCollabForm} />          
         </div>
         <div className='center-block' style={{ textAlign: 'center' }}>
