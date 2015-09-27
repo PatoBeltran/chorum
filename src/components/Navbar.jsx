@@ -1,5 +1,6 @@
 import React from 'react';
 import Parse from 'parse';
+import Icon from 'react-fontawesome';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -24,13 +25,10 @@ export default class Navbar extends React.Component {
           </div>
 
           <div className="collapse navbar-collapse">
-            <ul className="nav navbar-nav">
+            <ul className="nav navbar-nav navbar-right">
               <li><a href="#/projects">My Projects</a></li>
               <li><a href="#/tracks">My Tracks</a></li>
-            </ul>
-            
-            <ul className="nav navbar-nav navbar-right">
-              <li><a href="#" onClick={this.logout}>Logout</a></li>
+              <li><a href="#" onClick={this.logout}><Icon name="sign-out" size='2x'/></a></li>
             </ul>
           </div>
         </div>

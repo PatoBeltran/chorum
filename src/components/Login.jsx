@@ -45,7 +45,7 @@ export default class LogIn extends React.Component {
           this.props.onLogin(user);
         }
       },
-      error: (user, error) => {
+      error: (error) => {
         if (this.props.onError) {
           this.props.onError(error.message);
         }

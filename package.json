@@ -38,6 +38,7 @@
     "ramda": "^0.17.1",
     "react": "^0.13.3",
     "react-bootstrap": "^0.25.2",
+    "react-fontawesome": "^0.3.3",
     "react-gravatar": "^2.1.0",
     "react-parallax": "^0.1.4",
     "react-router": "git+https://github.com/rackt/react-router"
