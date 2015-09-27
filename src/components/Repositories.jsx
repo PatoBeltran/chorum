@@ -14,17 +14,16 @@ export default class Repositories extends React.Component {
   render() {
     return (
         <div>
-          <ul>
-            { 
-              this.user.projects.map(this.renderRepository);
-            }
+          <ul>{ 
+              (this.user.projects) ? this.user.projects.map(this.renderRepository) : ""
+              }
           </ul>
         </div>
     );
   }
 
   renderRepository(repo) {
-    <li><a href=`#/${this.user.id}/${repo.id}`>{ repo.name }</a></li>
+    <li><a href={`#/${this.user.id}/${repo.id}`}>{ repo.name }</a></li>
   }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Registration from './Registration.jsx';
+import HomePage from './HomePage.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -7,7 +7,7 @@ export default class App extends React.Component {
     this.state = {};
   }
   render() {
-    return <Registration></Registration>
+    return <HomePage></HomePage>
   }
 }
 
